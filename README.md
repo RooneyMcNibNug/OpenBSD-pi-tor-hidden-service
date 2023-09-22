@@ -49,3 +49,8 @@ Get things updated: systpatch, pkg_add -u
 pkg_add -i tor torsocks vim exfat-fuse htop
 mkdir Documents && cp /etc/tor/torrc home/user/Documents/torrc.backup
 Uncomment the tor dir lines and port 80 lins
+
+### READING MATERIALS:
+
+'How do Onion Services work?' - https://community.torproject.org/onion-services/overview/
+Openbsd's manual page for HTTPD.conf - https://man.openbsd.org/httpd.conf.5

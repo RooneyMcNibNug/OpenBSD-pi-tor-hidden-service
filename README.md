@@ -38,6 +38,27 @@ https://pinout.xyz/
 
 ### using the server as a unix ssh box over tor
 
+```
+user@remote_pc:~ $ torsocks ssh user@[site].onion
+The authenticity of host ‘[site].onion (127.42.42.0)' can't be established.
+ECDSA key fingerprint is SHA256:blahblahblah.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added ‘[site].onion' (ECDSA) to the list of known hosts.
+user@[site].onion's password:
+Last login: Thu Sep 21 15:28:46 2023 from 192.168.0.x
+OpenBSD 7.3 (GENERIC.MP) #1: Mon Jul 24 12:12:28 MDT 2023
+
+Welcome to OpenBSD: The proactively secure Unix-like operating system.
+
+Please use the sendbug(1) utility to report bugs in the system.
+Before reporting a bug, please try to reproduce it with the latest
+version of the code.  With bug reports, please try to ensure that
+enough information to reproduce the problem is enclosed, and if a
+known fix for it exists, include that as well.
+
+openbsdeez$
+```
+
 ### hosting a git repo
 
 Download arm64 img

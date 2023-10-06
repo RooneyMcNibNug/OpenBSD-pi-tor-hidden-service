@@ -16,9 +16,30 @@ This guide assumes you have a *nix machine or Windows with [WSL](https://learn.m
 
 ⚠️ BE CAREFUL / BE SURE THAT YOU ARE IMAGING TO THE CORRECT DISK, AS NOT TO WIPE YOUR PRIMARY OS OR ANYTHING ELSE ⚠️
 
+We can easily use `dd` for this from the terminal. `cd` to the directory where you saved the OpenBSD image, then identify the microSD with something like `df -h` or `lsblk`, then run the `dd` command to write the image to the disk:
+
+```console
+$ cd /home/user/Downloads
+$ lsblk -o NAME,MOUNTPOINT,SIZE,VENDOR,MODEL
+NAME   MOUNTPOINT  SIZE VENDOR   MODEL
+sda                500G Seagate  XYZ
+├─sda1 /boot       200M 
+├─sda2 [SWAP]      4G 
+└─sda3 /           496G
+sdb                24G  Kingston SD
+
+$ dd if=miniroot73.img of=/dev/sdb bs=1M conv=fsync
+```
+
+You should see something like `2511872 bytes transferred in 0.034 secs (72095271 bytes/sec)` as the output. At that point, you can eject the microSD and insert it into your Raspberry Pi.
+
 ### Installing OpenBSD onto a RaspberryPi 3B+ (or other model)
 
-https://pinout.xyz/
+For the installation process on the Pi, we will need to get a shell via USB Serial. This might be unfamiliar territory for some, but with caution and the right tools we can make it happen.
+
+You will want to have either a USB to TTL Serial Cable like [this](https://www.adafruit.com/product/954), or something like a [FTDI Friend](https://learn.adafruit.com/ftdi-friend/overview) adapter. In this example, I will use the FTDI Friend, but regardless you need to make sure you understand the pin locations and what they do - your best bet for that is to first consult this website: https://pinout.xyz
+
+
 
 ![image](https://github.com/RooneyMcNibNug/OpenBSD-pi-tor-hidden-service/assets/17930955/c18c2a11-c45f-4891-a3f5-df0176eac462)
 
@@ -38,7 +59,7 @@ https://pinout.xyz/
 
 ### using the server as a unix ssh box over tor
 
-```
+```console
 user@remote_pc:~ $ torsocks ssh user@[site].onion
 The authenticity of host ‘[site].onion (127.42.42.0)' can't be established.
 ECDSA key fingerprint is SHA256:blahblahblah.

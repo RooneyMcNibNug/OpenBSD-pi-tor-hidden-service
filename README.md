@@ -59,6 +59,21 @@ You will want to have either a USB to TTL Serial Cable like [this](https://www.a
 
 ### using the server as a unix ssh box over tor
 
+One of the many great things about a tor hidden service is that it accomplishes NAT traversal automatically through the tor network, allowing you to connect to the host here from ther road, and even other resources on the network it is being hosted within from that point. WHo needs a VPN when you have a tor hidden service running on your Pi!
+
+In order to accomplish this, you need to add the following to your `/etc/tor/torrc` config:
+
+
+```
+HiddenServicePort 22 127.0.0.1:22
+```
+
+After adding this, you'll want to do restart tor with a quick `rcctl restart tor`.
+
+You may have noticed earlier that we used OpenBSD's package manager to install [torsocks](https://gitlab.torproject.org/tpo/core/torsocks/) - we can use this here on our local machine too, so make sure ti install it on your desktop/laptop you will remote into the Pi with. 
+
+From there, you can do the following:
+
 ```console
 user@remote_pc:~ $ torsocks ssh user@[site].onion
 The authenticity of host ‘[site].onion (127.42.42.0)' can't be established.

@@ -57,6 +57,10 @@ You will want to have either a USB to TTL Serial Cable like [this](https://www.a
 
 ### Serving up a site with HTTPD
 
+```
+/var/www/htdocs/{}.onion/
+```
+
 ### using the server as a unix ssh box over tor
 
 One of the many great things about a tor hidden service is that it accomplishes NAT traversal automatically through the tor network, allowing you to connect to the host here from ther road, and even other resources on the network it is being hosted within from that point. WHo needs a VPN when you have a tor hidden service running on your Pi!

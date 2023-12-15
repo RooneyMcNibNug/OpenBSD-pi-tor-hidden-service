@@ -60,6 +60,20 @@ You will want to have either a USB to TTL Serial Cable like [this](https://www.a
 ```
 /var/www/htdocs/{}.onion/
 ```
+### Serving up files on that site!
+You can plug in an external drive to your pi and symlink the files from their to the aformentioned `/var/www/htdocs/...` to allow people to download them from tor!
+
+Like so:
+
+```console
+ln -s /path/to/file/photo-of-my-dog.jpg /var/www/htdocs/{}.onion/photo-of-my-dog.jpg
+```
+
+Now you can send over the onion link for someone to grab via tor:
+
+```
+{}.onion/photo-of-my-dog.jpg
+```
 
 ### using the server as a unix ssh box over tor
 

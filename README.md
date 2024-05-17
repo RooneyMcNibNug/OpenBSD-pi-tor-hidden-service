@@ -1,6 +1,6 @@
 # Hosting an OpenBSD Hidden Service on a Raspberry Pi with OpenBSD
 
-Its the Year of ~Linux on Desktop~ Tor on Pi! Let's do it with  our favorite pufferfish 🐡
+Its the Year of ~Linux on Desktop~ Tor on Pi! Let's do it with our favorite pufferfish 🐡
 
 ---
 
@@ -39,23 +39,48 @@ For the installation process on the Pi, we will need to get a shell via USB Seri
 
 You will want to have either a USB to TTL Serial Cable like [this](https://www.adafruit.com/product/954), or something like a [FTDI Friend](https://learn.adafruit.com/ftdi-friend/overview) adapter. In this example, I will use the FTDI Friend, but regardless you need to make sure you understand the pin locations and what they do - your best bet for that is to first consult this website: https://pinout.xyz
 
-
-
 ![image](https://github.com/RooneyMcNibNug/OpenBSD-pi-tor-hidden-service/assets/17930955/c18c2a11-c45f-4891-a3f5-df0176eac462)
 
 ![image](https://github.com/RooneyMcNibNug/OpenBSD-pi-tor-hidden-service/assets/17930955/784921c3-a03a-4f4d-997c-142932fe5095)
 
+Now, its time for the install. This can seem a bit daunting, but following https://www.openbsd.org/faq/faq4.html#Install will get you easily on your way, I promise. It is recommended that you install all Sets during this process.
 
 ### Initial steps afterboot
+
+Yay, we have OpenBSD installed on our Pi! There are some important things we should do upon first boot.
+
+OpenBSD has their https://man.openbsd.org/afterboot as a nice checklist, but allow me to list out some thing here:
+
+1. change the root password with `passwd root`
+2. If you want to change your system's hostname, you can  `vim /etc/myname`
+3. Its worth just double-checking that there aren't any missing patches by running `syspatch`
 
 ![image](https://github.com/RooneyMcNibNug/OpenBSD-pi-tor-hidden-service/assets/17930955/8a074641-deec-4b59-963a-0ed037308671)
 
 
 ### Installing tor and setting up the hidden service
 
+Before you get your Hidden Service up and running, you will need to install Tor and some other packages via OpenBSDs [package manager](https://www.openbsd.org/faq/faq15.html):
+
+```
+pkg_add -i tor torsocks vim exfat-fuse htop
+```
+
+Now, before doing anything else, save a copy of the default `torrc` config file so that we can have that back-pocket in case of any issues:
+
+```
+mkdir Documents && cp /etc/tor/torrc home/user/Documents/torrc.backup
+```
+
 ## "Alright, what can I do with this thing?
 
+Lots! I will highlight some of the things that might be worth doing, but I'm sure you can also find many others:
+
 ### Serving up a site with HTTPD
+```
+onion=$(cat /var/tor/hidden_service/hostname)
+mkdir /var/www/htdocs/$onion
+```
 
 ```
 /var/www/htdocs/{}.onion/
@@ -78,6 +103,8 @@ Now you can send over the onion link for someone to grab via tor:
 ### using the server as a unix ssh box over tor
 
 One of the many great things about a tor hidden service is that it accomplishes NAT traversal automatically through the tor network, allowing you to connect to the host here from ther road, and even other resources on the network it is being hosted within from that point. WHo needs a VPN when you have a tor hidden service running on your Pi!
+
+Yes, this can be pretty slow, but its an option (and a nice one, at that)
 
 In order to accomplish this, you need to add the following to your `/etc/tor/torrc` config:
 
@@ -121,8 +148,6 @@ Install non-root user
 Install all sets
 Setup doas for non-root user
 Get things updated: systpatch, pkg_add -u
-pkg_add -i tor torsocks vim exfat-fuse htop
-mkdir Documents && cp /etc/tor/torrc home/user/Documents/torrc.backup
 Uncomment the tor dir lines and port 80 lins
 
 ### READING MATERIALS:

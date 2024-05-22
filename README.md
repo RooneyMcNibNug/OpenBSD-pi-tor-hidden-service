@@ -33,7 +33,7 @@ $ dd if=miniroot73.img of=/dev/sdb bs=1M conv=fsync
 
 You should see something like `2511872 bytes transferred in 0.034 secs (72095271 bytes/sec)` as the output. At that point, you can eject the microSD and insert it into your Raspberry Pi.
 
-### Installing OpenBSD onto a RaspberryPi 3B+ (or other model)
+###  Preparing and accessing the RaspberryPi 3B+ (or other model)
 
 For the installation process on the Pi, we will need to get a shell via USB Serial. This might be unfamiliar territory for some, but with caution and the right tools we can make it happen.
 
@@ -42,6 +42,32 @@ You will want to have either a USB to TTL Serial Cable like [this](https://www.a
 ![image](https://github.com/RooneyMcNibNug/OpenBSD-pi-tor-hidden-service/assets/17930955/c18c2a11-c45f-4891-a3f5-df0176eac462)
 
 ![image](https://github.com/RooneyMcNibNug/OpenBSD-pi-tor-hidden-service/assets/17930955/784921c3-a03a-4f4d-997c-142932fe5095)
+
+With the Serial to USB trinket all plugged into the Pi one end and your laptop or PC on the other, use the following to list all connected devices and look for the one corresponding to your Pi - it will usually be something like `/dev/ttyUSB0` or `/dev/ttyACM0`:
+
+```
+dmesg | grep -i "tty"
+```
+
+(You may need to use `sudo` here.)
+
+Take note of the output. For this example, lets say its `/dev/ttyUSB0`. On your *nix OS, changes are you already have the `screen` application installed. We will need this, so make sure it is. If you need to install it, please use your system's package manager to do so, as it is available on almost all distros: https://pkgs.org/download/screen
+
+Now in the terminal get ready to connect to the Pi:
+
+```
+screen /dev/ttyUSB0 115200
+```
+
+(The numbers at the end is the baud rate, but let's not worry about that so much right now)
+
+You'll get some stuff on the screen, but mostly you are looking to make sure you see the following:
+
+```
+Welcome to the OpenBSD/amd64 7.0 installation program.
+(I)nstall, (U)pgrade, (A)utoinstall or (S)hell?
+```
+# Installing OpenBSD on the Pi
 
 Now, its time for the install. This can seem a bit daunting, but following https://www.openbsd.org/faq/faq4.html#Install will get you easily on your way, I promise. It is recommended that you install all Sets during this process.
 

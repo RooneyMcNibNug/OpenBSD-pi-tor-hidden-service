@@ -168,13 +168,7 @@ openbsdeez$
 
 ### hosting a git repo
 
-Download arm64 img
-Install with GPIO pins and
-Install non-root user
-Install all sets
-Setup doas for non-root user
 Get things updated: systpatch, pkg_add -u
-Uncomment the tor dir lines and port 80 lins
 
 ### READING MATERIALS:
 

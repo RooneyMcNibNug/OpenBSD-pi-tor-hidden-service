@@ -28,7 +28,7 @@ sda                500G Seagate  XYZ
 └─sda3 /           496G
 sdb                24G  Kingston SD
 
-$ dd if=miniroot73.img of=/dev/sdb bs=1M conv=fsync
+$ dd if=miniroot76.img of=/dev/sdb bs=1M conv=fsync
 ```
 
 You should see something like `2511872 bytes transferred in 0.034 secs (72095271 bytes/sec)` as the output. At that point, you can eject the microSD and insert it into your Raspberry Pi.

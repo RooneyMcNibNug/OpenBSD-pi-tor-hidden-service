@@ -8,7 +8,7 @@ Its the Year of ~Linux on Desktop~ Tor on Pi! Let's do it with our favorite puff
 
 You can head over to www.openbsd.org to do this - any one of the [mirrors](https://www.openbsd.org/ftp.html) available on there will have an `.img` file of the architecture you need - which, for the raspberry pi, is the `arm64` image.
 
-So go to something like https://cdn.openbsd.org/pub/OpenBSD/7.3/arm64/ (or whatever the latest version number is for you as of reading this, replacing the URL accordingly) and download the `miniroot73.img` file, which is nice and small.
+So go to something like https://cdn.openbsd.org/pub/OpenBSD/7.6/arm64/ (or whatever the latest version number is for you as of reading this, replacing the URL accordingly) and download the `miniroot76.img` file, which is nice and small.
 
 ### Imaging OpenBSD on a microSD
 

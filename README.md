@@ -85,6 +85,7 @@ OpenBSD has their https://man.openbsd.org/afterboot as a nice checklist, but all
 1. change the root password with `passwd root`
 2. If you want to change your system's hostname, you can  `vim /etc/myname`
 3. Its worth just double-checking that there aren't any missing patches by running `syspatch`
+4. Same thing as the last step, but for existing packages - you can update them with `pkg_add -u`
 
 ![image](https://github.com/RooneyMcNibNug/OpenBSD-pi-tor-hidden-service/assets/17930955/8a074641-deec-4b59-963a-0ed037308671)
 
@@ -173,9 +174,11 @@ openbsdeez$
 
 ### hosting a git repo
 
-Get things updated: systpatch, pkg_add -u
+🚧
 
 ### READING MATERIALS:
 
-'How do Onion Services work?' - https://community.torproject.org/onion-services/overview/
-Openbsd's manual page for HTTPD.conf - https://man.openbsd.org/httpd.conf.5
+- 'How do Onion Services work?': https://community.torproject.org/onion-services/overview/
+- Openbsd's manual page for `HTTPD.conf`: https://man.openbsd.org/httpd.conf.5
+- A good unofficial handbook for OpenBSD: https://www.openbsdhandbook.com/
+- An even better book about OpenBSD: https://nostarch.com/obenbsd2e

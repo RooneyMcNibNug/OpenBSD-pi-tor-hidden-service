@@ -71,9 +71,14 @@ Welcome to the OpenBSD/amd64 7.0 installation program.
 
 Now, its time for the install. This can seem a bit daunting, but following https://www.openbsd.org/faq/faq4.html#Install will get you easily on your way, I promise. It is recommended that you install all Sets during this process.
 
+Here are some other context-specific notes on the install here:
+
+- Make sure to use the `?` option for the interface configuration options to find the best valid interface if you are using ethernet (which you should)
+- It is a very good idea to encrypt the root disk with a passphrase during the installation, which is now offered as a step during disks setup
+
 ### Initial steps afterboot
 
-Yay, we have OpenBSD installed on our Pi! There are some important things we should do upon first boot.
+Yay, we have OpenBSD installed on our Pi! Celebrate, and then when you are done, there are a few important things we should do upon first boot.
 
 OpenBSD has their https://man.openbsd.org/afterboot as a nice checklist, but allow me to list out some thing here:
 

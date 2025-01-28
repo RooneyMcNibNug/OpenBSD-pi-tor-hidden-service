@@ -175,6 +175,33 @@ openbsdeez$
 ### hosting a git repo
 
 🚧
+Use Game of Trees, a git replacement developed for OpenBSD:
+https://www.gameoftrees.org/install.html
+
+`pkg_add -i git got gotd gotwebd`
+
+Now is a good time to set your GoT Author email. Replace the address here in the var:
+
+`export GOT_AUTHOR='Flan Hacker <username@email.com>'`
+
+Create a folder for these repos to live:
+```
+mkdir /var/git/repo1.git
+```
+
+Now lets point to them in our `httpd` config:
+`vim /etc/httpd.conf`:
+```
+types { include "/usr/share/misc/mime.types" }
+
+server "example.com" {
+	listen on * port 80
+	root "/htdocs/gotwebd"
+	location "/" {
+		fastcgi socket "/run/gotweb.sock"
+	}
+}
+```
 
 ### READING MATERIALS:
 
@@ -182,3 +209,4 @@ openbsdeez$
 - Openbsd's manual page for `HTTPD.conf`: https://man.openbsd.org/httpd.conf.5
 - A good unofficial handbook for OpenBSD: https://www.openbsdhandbook.com/
 - An even better book about OpenBSD: https://nostarch.com/obenbsd2e
+- Running Game Of Trees as on `httpd`: https://www.gameoftrees.org/gotwebd.8.html
